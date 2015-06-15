@@ -15,14 +15,22 @@ Vagrant.configure(2) do |config|
   config.vm.box = "ubuntu/trusty64"
   config.vm.provision :shell, path: "bootstrap.sh"
   
-  dev_requirements = ENV['BOOTSTRAP'].split(',') if ENV['BOOTSTRAP']
-  for requirement in dev_requirements
-      if File.exists?("#{requirement}.sh")
-          puts "Bootstrapping #{requirement}..."
-          config.vm.provision :shell, path: "{requirement}.sh"
-      else
-          puts "Cannot find bootstrapping recipe for #{requirement}!"
-      end
+  config.vm.define :python do |python|
+      python.vm.provision :shell, path: 'python.sh'
+  end
+
+  config.vm.define :haskell do |haskell|
+      haskell.vm.provision :shell, path: 'haskell.sh'
+  end
+
+  config.vm.define :ruby do |ruby|
+      ruby.vm.provision :shell, path: 'ruby.sh'
+  end
+
+  config.vm.define :all do |all|
+      all.vm.provision :shell, path: 'python.sh'
+      all.vm.provision :shell, path: 'haskell.sh'
+      all.vm.provision :shell, path: 'ruby.sh'
   end
 
   # Disable automatic box update checking. If you disable this, then

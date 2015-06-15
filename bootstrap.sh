@@ -13,17 +13,19 @@ git clone https://github.com/emintham/dotvim
 mv dotvim ${HOME}/.vim
 ln -s ${HOME}/.vim/.vimrc ${HOME}
 
-# vim stuff because vim apparently can't do it in a vagrant box
+
+# -- Vim stuff --
 VIM_BUNDLE_DIR=${HOME}/.vim/bundle
 
 cd ${VIM_BUNDLE_DIR}
 rm -rf supertab ctrlp.vim vim-fugitive
-git clone https://github.com/ervandew/supertab.git
-git clone https://github.com/tpop/vim-fugitive.git
-git clone https://github.com/kien/ctrlp.vim.git
+chown -R vagrant ${HOME}/.vim
+vim +PluginInstall +qall
 cd ${HOME}
 chown -R vagrant ${HOME}/.vim
 
+
+# -- dotfiles --
 git clone https://github.com/emintham/dotfiles
 mv dotfiles/aliases ${HOME}/.bash_aliases
 mv dotfiles/gitconfig ${HOME}/.gitconfig
