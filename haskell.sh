@@ -1,6 +1,11 @@
 #! /usr/bin/env bash
 
 HOME=/home/vagrant
+if [ -f ${HOME}/.zshrc ]; then
+    SHELLRC=${HOME}/.zshrc
+else
+    SHELLRC=${HOME}/.bashrc
+fi
 
 
 # -- Haskell --
@@ -13,10 +18,13 @@ sudo apt-get install -y zlib1g-dev pkg-config build-essential autoconf \
     automake ghc-head cabal-install-head
 
 PATH=${CABAL_DIR}:${GHC_DIR}:$PATH
-echo '# -- Haskell Paths --' >> ${HOME}/.bashrc
-echo 'export PATH=/opt/ghc/head/bin/:$PATH' >> ${HOME}/.bashrc
-echo 'export PATH=/opt/cabal/head/bin/:$PATH' >> ${HOME}/.bashrc
-echo 'export PATH=/home/vagrant/.cabal/bin/:$PATH' >> ${HOME}/.bashrc
+echo >> ${SHELLRC}
+echo '# -- Haskell Paths --' >> ${SHELLRC}
+echo 'export PATH=/opt/ghc/head/bin/:$PATH' >> ${SHELLRC}
+echo 'export PATH=/opt/cabal/head/bin/:$PATH' >> ${SHELLRC}
+echo 'export PATH=/home/vagrant/.cabal/bin/:$PATH' >> ${SHELLRC}
+echo >> ${SHELLRC}
+
 cabal update && \
     cabal install happy hlint hspec quickcheck hoogle
 echo ':set prompt "ghci> "' >> ${HOME}/.ghci
