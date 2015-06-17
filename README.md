@@ -8,8 +8,14 @@
 5. `vagrant add box "ubuntu/trusty64"`
 6. `vagrant up <environment>`
 
+## Caveats
+- The default RAM is 4GB, set this to something smaller if this is too large for your use.
+- You should probably change the bootstrap to pull your editor settings and shell settings unless you don't really care.
+
 # Supported Development Environments
 - basic
+- node
 - haskell
+- purescript
 - python (2.7)
 - ruby

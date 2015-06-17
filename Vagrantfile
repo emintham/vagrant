@@ -14,8 +14,12 @@ Vagrant.configure(2) do |config|
   # boxes at https://atlas.hashicorp.com/search.
   config.vm.box = "ubuntu/trusty64"
   config.vm.provision :shell, path: "bootstrap.sh"
-  
+
   config.vm.define :basic do |basic|
+  end
+
+  config.vm.define :node do |node|
+      node.vm.provision :shell, path: 'node.sh'
   end
 
   config.vm.define :python do |python|
@@ -24,6 +28,12 @@ Vagrant.configure(2) do |config|
 
   config.vm.define :haskell do |haskell|
       haskell.vm.provision :shell, path: 'haskell.sh'
+  end
+
+  config.vm.define :purescript do |purescript|
+      purescript.vm.provision :shell, path: 'haskell.sh'
+      purescript.vm.provision :shell, path: 'node.sh'
+      purescript.vm.provision :shell, path: 'purescript.sh'
   end
 
   config.vm.define :ruby do |ruby|
