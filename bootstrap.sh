@@ -32,6 +32,7 @@ git clone https://github.com/emintham/zsh-files
 mv ${HOME}/zsh-files/zshrc ${HOME}/.zshrc
 cd ${HOME}/zsh-files
 cp -rv --parents * ${HOME}/.oh-my-zsh/
+cd ${HOME}
 rm -rf ${HOME}/zsh-files
 chown vagrant zsh-files
 chown -R vagrant ${HOME}/.oh-my-zsh
